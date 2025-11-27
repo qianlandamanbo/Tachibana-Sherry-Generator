@@ -37,6 +37,9 @@ Sherry/
 ├── requirements.txt # 依赖包
 ├── background_images/ # 背景图片
 ├── Font/ # 字体
+├── images/ # 一些示例图片
+| ├── 1.png
+| ├── 2.png
 ├── core/
 │ ├── __init__.py
 | ├── config.py # [配置] 配置文件
@@ -53,4 +56,5 @@ Sherry/
 ├── app_window.py # [界面] 主窗口框架 (Notebook)
 ├── classic_tab.py # [界面] 经典模式选项卡
 └── listener_tab.py # [界面] 监听模式选项卡
+
 ```

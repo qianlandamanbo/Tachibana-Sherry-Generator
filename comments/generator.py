@@ -1,5 +1,5 @@
-import os  # 导入操作系统模块，用于文件路径和目录操作
-from PIL import Image, ImageDraw, ImageFont, ImageTk  # 导入 Pillow 库，用于强大的图像处理
+import os
+from PIL import Image, ImageDraw, ImageFont, ImageTk
 
 # ==========================================
 #  核心逻辑层: 只负责画图，不负责弹窗

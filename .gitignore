@@ -1,7 +1,16 @@
-__pycache__/generator.cpython-312.pyc
-comments/__pycache__/generator.cpython-312.pyc
-__pycache__/memeapp.cpython-312.pyc
-comments/__pycache__/memeapp.cpython-312.pyc
-./__pycache__
-*.py[cod]
-*$py.class
+# Virtual environments
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build artifacts
+dist/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

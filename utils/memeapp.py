@@ -4,7 +4,11 @@ import threading  # 导入多线程模块，用于后台生成图片，防止界
 import tkinter as tk  # 导入 tkinter，Python 标准 GUI 库
 from tkinter import ttk, filedialog, messagebox, colorchooser  # 导入 tkinter 的高级组件和弹窗工具
 from PIL import Image, ImageTk  # 导入 Pillow 库，用于强大的图像处理
+<<<<<<< HEAD
+from .generator import ImageGenerator
+=======
 from generator import ImageGenerator
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
 
 # ==========================================
 #  UI 交互层: 负责显示和用户输入
@@ -169,9 +173,23 @@ class MemeApp:
         self.combo_bg.bind("<<ComboboxSelected>>", self._on_input_change)
         
         # 添加背景按钮
+<<<<<<< HEAD
+        btn_add_bg = ttk.Button(group_res, text="+ 添加新图片", command=self._add_background)
+        btn_add_bg.pack(anchor='e', padx=5, pady=2)
+
+        # 图片缩放模式选择
+        ttk.Label(group_res, text="图片缩放模式:").pack(anchor='w', padx=5, pady=(10, 0))
+        self.var_resize_mode = tk.StringVar(value="contain")
+        self.combo_resize = ttk.Combobox(group_res, textvariable=self.var_resize_mode, state="readonly")
+        self.combo_resize['values'] = ("包含模式 (保持比例，不拉伸)", "覆盖模式 (填充整个区域)")
+        self.combo_resize.pack(fill=tk.X, padx=5, pady=2)
+        self.combo_resize.bind("<<ComboboxSelected>>", self._on_resize_mode_change)
+
+=======
         btn_add_bg = ttk.Button(group_res, text="+ 添加新背景", command=self._add_background)
         btn_add_bg.pack(anchor='e', padx=5, pady=2)
 
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         # 字体选择下拉框
         ttk.Label(group_res, text="字体文件:").pack(anchor='w', padx=5, pady=(10, 0))
         self.combo_font = ttk.Combobox(group_res, textvariable=self.var_font_file, state="readonly")
@@ -222,7 +240,11 @@ class MemeApp:
     def _add_background(self):
         """
         Description:
+<<<<<<< HEAD
+            打开文件对话框添加新图片，并自动复制到资源目录。
+=======
             打开文件对话框添加新背景图，并自动复制到资源目录。
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
             Open file dialog to add new bg image, copy to resource folder.
 
         Args:
@@ -278,6 +300,24 @@ class MemeApp:
         # 如果在这 300ms 内用户又打字了，这个任务会被上面的 cancel 取消掉
         self._preview_job = self.root.after(300, self._trigger_preview_update)
 
+<<<<<<< HEAD
+    def _on_resize_mode_change(self, event=None):
+        """
+        Description:
+            处理图片缩放模式改变事件
+            Handle image resize mode change event
+
+        Args:
+            event (tk.Event): 事件对象. Defaults to None.
+
+        Returns:
+            None
+        """
+        # 立即触发预览更新
+        self._trigger_preview_update()
+
+=======
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
     def _trigger_preview_update(self):
         """
         Description:
@@ -294,6 +334,16 @@ class MemeApp:
             >>> self._trigger_preview_update()
         """
         # 1. 收集参数字典
+<<<<<<< HEAD
+        # 处理缩放模式选择
+        resize_mode_text = self.var_resize_mode.get()
+        if "覆盖模式" in resize_mode_text:
+            resize_mode = 'cover'
+        else:
+            resize_mode = 'contain'
+        
+=======
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         settings = {
             # 获取文本框内容，从第一行第0列到结尾，并去除首尾空格
             'text': self.text_input.get("1.0", tk.END).strip(),
@@ -303,7 +353,12 @@ class MemeApp:
             'outline_width': self.var_outline_width.get(),
             # 构造背景图完整路径
             'bg_path': os.path.join(self.generator.bg_folder, self.var_bg_file.get()) if self.var_bg_file.get() else None,
+<<<<<<< HEAD
+            'font_file': self.var_font_file.get(),
+            'resize_mode': resize_mode
+=======
             'font_file': self.var_font_file.get()
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         }
 
         # 2. 启动新线程生成 (避免卡死 UI 主线程)
@@ -414,11 +469,23 @@ class MemeApp:
         if not self.current_image_obj:
             return
         
+<<<<<<< HEAD
+        # 确保输出目录存在
+        output_dir = "output_images"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        
+=======
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         # 生成时间戳文件名 (e.g., 20231001120000.png)
         timestamp = time.strftime("%Y%m%d%H%M%S")
         filename = f"{timestamp}.png"
         # 拼接保存路径
+<<<<<<< HEAD
+        save_path = os.path.join(output_dir, filename)
+=======
         save_path = os.path.join("output_images", filename)
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         
         try:
             # 保存文件

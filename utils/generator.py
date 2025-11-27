@@ -58,6 +58,52 @@ class ImageGenerator:
         total_height = len(lines) * line_height
         return lines, total_height, line_height
 
+<<<<<<< HEAD
+    def _resize_image_with_ratio(self, img, target_size=(900, 900), mode='contain'):
+        """
+        [辅助] 按比例缩放图片，保持宽高比
+        Args:
+            img: PIL图片对象
+            target_size: 目标尺寸 (width, height)
+            mode: 缩放模式 'contain'(包含) 或 'cover'(覆盖)
+        Returns:
+            缩放后的PIL图片对象
+        """
+        original_width, original_height = img.size
+        target_width, target_height = target_size
+        
+        if mode == 'contain':
+            # 包含模式：图片完全显示在目标区域内，保持比例
+            width_ratio = target_width / original_width
+            height_ratio = target_height / original_height
+            ratio = min(width_ratio, height_ratio)
+        else:  # cover模式
+            # 覆盖模式：图片覆盖整个目标区域，保持比例
+            width_ratio = target_width / original_width
+            height_ratio = target_height / original_height
+            ratio = max(width_ratio, height_ratio)
+        
+        # 计算新尺寸
+        new_width = int(original_width * ratio)
+        new_height = int(original_height * ratio)
+        
+        # 缩放图片
+        resized_img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        
+        # 创建新的画布
+        new_img = Image.new('RGB', target_size, color='white')
+        
+        # 计算居中位置
+        x_offset = (target_width - new_width) // 2
+        y_offset = (target_height - new_height) // 2
+        
+        # 将缩放后的图片粘贴到新画布上
+        new_img.paste(resized_img, (x_offset, y_offset))
+        
+        return new_img
+
+=======
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
     def render_image(self, settings):
         """
         核心渲染函数
@@ -68,6 +114,11 @@ class ImageGenerator:
         """
         # 1. 加载背景
         bg_path = settings.get('bg_path')
+<<<<<<< HEAD
+        resize_mode = settings.get('resize_mode', 'contain')  # 默认使用包含模式
+        
+=======
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         if not bg_path or not os.path.exists(bg_path):
             # 如果没背景，创建一个灰色的空背景防止报错
             img = Image.new('RGB', (900, 900), color='gray')
@@ -75,7 +126,12 @@ class ImageGenerator:
             try:
                 img = Image.open(bg_path).convert('RGB')
                 if img.size != (900, 900):
+<<<<<<< HEAD
+                    # 使用自适应缩放，保持比例不拉伸
+                    img = self._resize_image_with_ratio(img, (900, 900), resize_mode)
+=======
                     img = img.resize((900, 900), Image.Resampling.LANCZOS)
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
             except Exception as e:
                 print(f"背景加载失败: {e}")
                 img = Image.new('RGB', (900, 900), color='gray')
@@ -86,7 +142,12 @@ class ImageGenerator:
             return img
 
         # 2. 加载字体
+<<<<<<< HEAD
+        font_file = settings.get('font_file', '')
+        font_path = os.path.join(self.font_folder, font_file) if font_file else None
+=======
         font_path = os.path.join(self.font_folder, settings.get('font_file', ''))
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
         max_font_size = settings.get('font_size', 100)
         
         # 简单的自适应字体大小逻辑
@@ -105,10 +166,18 @@ class ImageGenerator:
         while current_size >= min_size:
             try:
                 # 尝试加载字体
+<<<<<<< HEAD
+                if font_path and os.path.exists(font_path):
+                    font = ImageFont.truetype(font_path, current_size)
+                else:
+                    # 如果没有字体文件，使用默认字体
+                    font = ImageFont.load_default()
+=======
                 if os.path.exists(font_path):
                     font = ImageFont.truetype(font_path, current_size)
                 else:
                     font = ImageFont.load_default() # 兜底
+>>>>>>> e6abe0196acb87bd3f559e0e491ccbf31c8ab8bc
                 
                 # 计算换行
                 lines, h, line_h = self._calculate_wrapped_text(draw, text, font, draw_area_w)

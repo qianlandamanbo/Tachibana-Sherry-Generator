@@ -1,4 +1,4 @@
-from utils.memeapp import MemeApp
+from memeapp import MemeApp
 
 
 if __name__ == "__main__":

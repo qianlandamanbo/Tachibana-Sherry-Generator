@@ -1,0 +1,1 @@
+Optimized the listening mode, hotkeys changed to Enter or Ctrl+Enter. Compilation command: python setup.py build_ext --inplace

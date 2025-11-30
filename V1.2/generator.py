@@ -8,19 +8,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageTk  # 导入 Pillow 库，用�
 class ImageGenerator:
     def __init__(self, bg_folder="background_images", font_folder="Font"):
         """
-        Description:
-            初始化图片渲染器，设置资源文件夹路径并确保它们存在。
-            Initialize the image renderer, set resource paths and ensure they exist.
-
-        Args:
-            bg_folder (str): 背景图片文件夹名称. Defaults to "background_images".
-            font_folder (str): 字体文件文件夹名称. Defaults to "Font".
-
-        Returns:
-            None
-
-        Examples:
-            >>> renderer = ImageRenderer()
+        初始化图片渲染器，设置资源文件夹路径并确保它们存在。
         """
         # 保存背景文件夹路径
         self.bg_folder = bg_folder
@@ -36,18 +24,7 @@ class ImageGenerator:
 
     def _ensure_dir(self, path):
         """
-        Description:
-            [内部辅助] 检查文件夹是否存在，不存在则创建。
-            [Internal Helper] Check if directory exists, create if not.
-
-        Args:
-            path (str): 文件夹路径.
-
-        Returns:
-            None
-
-        Examples:
-            >>> self._ensure_dir("my_folder")
+        [内部辅助] 检查文件夹是否存在，不存在则创建。
         """
         # 判断路径是否存在
         if not os.path.exists(path):
@@ -58,21 +35,7 @@ class ImageGenerator:
 
     def get_files(self, folder, extensions):
         """
-        Description:
-            获取指定文件夹下符合特定后缀名的文件列表。
-            Get list of files in a folder matching specific extensions.
-
-        Args:
-            folder (str): 目标文件夹路径.
-            extensions (tuple): 后缀名元组 (e.g., ('.jpg', '.png')).
-
-        Returns:
-            list: 包含文件名的字符串列表.
-
-        Examples:
-            >>> files = self.get_files("bg_images", ('.png', '.jpg'))
-            >>> print(files)
-            ['bg1.png', 'bg2.jpg']
+        获取指定文件夹下符合特定后缀名的文件列表。
         """
         # 如果文件夹不存在，直接返回空列表
         if not os.path.exists(folder):
@@ -82,21 +45,7 @@ class ImageGenerator:
 
     def _calculate_wrapped_text(self, draw, text, font, max_width):
         """
-        Description:
-            [内部辅助] 计算文本自动换行逻辑。
-            [Internal Helper] Calculate text wrapping logic.
-
-        Args:
-            draw (ImageDraw): Pillow 的画笔对象 (用于计算宽度).
-            text (str): 原始文本.
-            font (ImageFont): 使用的字体对象.
-            max_width (int): 允许的最大宽度 (像素).
-
-        Returns:
-            tuple: (处理后的行列表 lines, 总高度 total_height, 单行高度 line_height)
-
-        Examples:
-            >>> lines, h, lh = self._calculate_wrapped_text(draw, "Hello World", font, 800)
+        [内部辅助] 计算文本自动换行逻辑。
         """
         lines = []  # 用于存储切分好的每一行文字
         try:
@@ -138,19 +87,7 @@ class ImageGenerator:
 
     def render_image(self, settings):
         """
-        Description:
-            核心渲染函数，根据设置生成最终图片。
-            Core rendering function, generates final image based on settings.
-
-        Args:
-            settings (dict): 包含绘图参数的字典 (text, bg_path, font_name, size, color, etc.).
-
-        Returns:
-            Image: Pillow 的 Image 对象.
-
-        Examples:
-            >>> cfg = {'text': 'Hi', 'bg_path': 'a.png', 'font_size': 50}
-            >>> img = renderer.render_image(cfg)
+        核心渲染函数，根据设置生成最终图片。
         """
         # 1. 加载背景图片
         bg_path = settings.get('bg_path')  # 从字典获取路径
